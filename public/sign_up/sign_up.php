@@ -1,3 +1,11 @@
+<?php
+session_start();
+
+require_once '../../database/database.php';
+
+require "confirm_sign_up.php";
+?>
+
 <!DOCTYPE html>
 <html lang="en">
 
@@ -11,40 +19,59 @@
 </head>
 
 <body>
-    <?php require "../../website_part/header.php" ?>
+    <?php 
+    
+    require "../../website_part/header.php";
+
+    ?>
 
     <div class="d-flex justify-content-center fz-text">
         <form action="" method="POST" class="mt-5 w-50">
 
             <div class="mb-3 bg-white rounded shadow-sm border border-2 p-4">
-                <label for="titleSubject" class="form-label text-muted text-uppercase ms-1" style="font-size:12px;opacity:0.7">Nom de famille</label>
-                <input name="titleTopic" type="text" class="form-control mb-3" id="titleSubject" style="font-size: 14px">
+                <h2 class="text-center">Inscription</h2>
+                <?php if (!empty($errors)) : ?>
+                    <div class="alert alert-danger pb-0 mt-3">
+                        <ul>
 
-                <label for="titleSubject" class="form-label text-muted text-uppercase ms-1" style="font-size:12px;opacity:0.7">Prénom</label>
-                <input name="titleTopic" type="text" class="form-control mb-3" id="titleSubject" style="font-size: 14px">
+                            <?php foreach ($errors as $error) : ?>
 
-                <label for="titleSubject" class="form-label text-muted text-uppercase ms-1" style="font-size:12px;opacity:0.7">Adresse e-mail</label>
-                <input name="titleTopic" type="email" class="form-control mb-3" id="titleSubject" style="font-size: 14px">
+                                <li><?= $error; ?></li>
 
-                <label for="titleSubject" class="form-label text-muted text-uppercase ms-1" style="font-size:12px;opacity:0.7">Genre</label>
-                <div class="d-flex flex-row">
+                            <?php endforeach; ?>
+
+                        </ul>
+                    </div>
+
+                <?php endif; ?>
+                <label for="lastName" class="form-label text-muted text-uppercase ms-1" style="font-size:12px;opacity:0.7">Nom de famille</label>
+                <input name="lastName" type="text" class="form-control mb-3" id="lastName" style="font-size: 14px">
+
+                <label for="firstName" class="form-label text-muted text-uppercase ms-1" style="font-size:12px;opacity:0.7">Prénom</label>
+                <input name="firstName" type="text" class="form-control mb-3" id="firstName" style="font-size: 14px">
+
+                <label for="e-mail" class="form-label text-muted text-uppercase ms-1" style="font-size:12px;opacity:0.7">Adresse e-mail</label>
+                <input name="email" type="email" class="form-control mb-3" id="e-mail" style="font-size: 14px">
+
+                <label class="form-label text-muted text-uppercase ms-1" style="font-size:12px;opacity:0.7">Genre</label>
+                <div class="d-flex flex-row mb-3">
                     <div class="form-check">
-                        <input class="form-check-input" type="radio" name="exampleRadios" id="exampleRadios1" value="man" checked>
-                        <label class="form-check-label text-muted text-uppercase ms-1" style="font-size:12px;opacity:0.7" for="exampleRadios1">Homme</label>
+                        <input class="form-check-input" type="radio" name="genderRadios" id="manRadio" value="Homme" checked>
+                        <label class="form-check-label text-muted text-uppercase ms-1" style="font-size:12px;opacity:0.7" for="manRadio">Homme</label>
                     </div>
                     <div class="form-check ms-4">
-                        <input class="form-check-input" type="radio" name="exampleRadios" id="exampleRadios2" value="woman">
-                        <label class="form-check-label form-label text-muted text-uppercase ms-1" style="font-size:12px;opacity:0.7" for="exampleRadios2">Femme</label>
+                        <input class="form-check-input" type="radio" name="genderRadios" id="womanRadio" value="Femme">
+                        <label class="form-check-label form-label text-muted text-uppercase ms-1" style="font-size:12px;opacity:0.7" for="womanRadio">Femme</label>
                     </div>
                 </div>
 
-                <label for="titleSubject" class="form-label text-muted text-uppercase ms-1" style="font-size:12px;opacity:0.7">Mot de passe</label>
-                <input name="titleTopic" type="password" class="form-control mb-3" id="titleSubject" style="font-size: 14px">
+                <label for="password" class="form-label text-muted text-uppercase ms-1" style="font-size:12px;opacity:0.7">Mot de passe</label>
+                <input name="password" type="password" class="form-control mb-3" id="password" style="font-size: 14px">
 
-                <label for="titleSubject" class="form-label text-muted text-uppercase ms-1" style="font-size:12px;opacity:0.7">Confirmez le mot de passe</label>
-                <input name="titleTopic" type="password" class="form-control mb-3" id="titleSubject" style="font-size: 14px">
+                <label for="ConfirmPassword" class="form-label text-muted text-uppercase ms-1" style="font-size:12px;opacity:0.7">Confirmez le mot de passe</label>
+                <input name="confirmPassword" type="password" class="form-control mb-3" id="ConfirmPassword" style="font-size: 14px">
 
-                <input type="submit" class="btn btn-primary" name="submitButtonQuestion" style="font-size:14px" value="Valider l'inscription">
+                <input type="submit" class="btn btn-primary" name="submit" style="font-size:14px" value="Valider l'inscription">
             </div>
 
         </form>
