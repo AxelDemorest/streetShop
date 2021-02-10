@@ -18,21 +18,24 @@ require_once '../../database/database.php';
 
 <body>
     <?php 
-    //require "../../website_part/header.php";
-    echo 'test';
-    print_r($_SESSION['panier']);
+    require "../../website_part/header.php";
+   
     if (isset($_SESSION['panier'])){
-
-    echo 'test';
+    
     $tablPanier = $_SESSION['panier'];
     $taille = count($tablPanier);
     for ($i=0; $i < $taille; $i++){
-    echo $tablPanier[$i];
+
+    ?>
+
+    <div class="card-body d-flex flex-column justify-content-end">
+        <h5 class="card-title text-center"><?php echo $tablPanier[$i]; ?></h5>
+    </div>
+    
+    <?php 
     }
     }
     ?>
-
-
 </body>
 </html>
 
