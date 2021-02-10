@@ -19,12 +19,13 @@ require_once '../../database/database.php';
     <title>Inscription - StreetShop</title>
 </head>
 
-<body>
+<body class="pb-5">
     <?php
 
     require "../../website_part/header.php";
 
     ?>
+
     <div id="fond" class="pb-5">
 
         <h1 class="pm-text">Tous les produits</h1>
@@ -34,23 +35,22 @@ require_once '../../database/database.php';
 
             $reqFetchProducts = $pdo->query('SELECT * FROM Products');
 
-            while ($result = $reqFetchProducts->fetch()) :
+            while ($result = $reqFetchProducts->fetch(PDO::FETCH_ASSOC)) :
             ?>
                 <li class="me-3">
                     <div class="card" style="width: 18rem;height:34em">
                         <div style="height: 100%" class="d-flex align-items-center">
-                            <img src="<?= $result->productsImg ?>" class="card-img-top" alt="...">
+                            <img src="<?= $result['productsImg'] ?>" class="card-img-top" alt="...">
                         </div>
                         <div class="card-body d-flex flex-column justify-content-end">
-                            <h5 class="card-title text-center"><?php echo $result->productsName ?></h5>
-                            <p class="card-text text-center mb-0"><?php echo $result->price ?>€</p>
-                            <a href="#" class="btn btn-primary mt-3">Commander</a>
+                            <h5 class="card-title text-center"><?php echo $result['productsName'] ?></h5>
+                            <p class="card-text text-center mb-0"><?php echo $result['price'] ?>€</p>
+                            <a id="id-<?= $result['productsId'] ?>" onclick="add_panier('<?= $result['productsName'] ?>', '<?= $result['categoriesId'] ?>')" class="btn btn-primary mt-3">Commander</a>
                         </div>
                     </div>
                 </li>
             <?php endwhile; ?>
         </ul>
-
     </div>
 
     <?php
@@ -79,7 +79,7 @@ require_once '../../database/database.php';
                                 <div class="card-body d-flex flex-column justify-content-end">
                                     <h5 class="card-title text-center"><?php echo $resultProductsOfCategories['productsName'] ?></h5>
                                     <p class="card-text text-center mb-0"><?php echo $resultProductsOfCategories['price'] ?>€</p>
-                                    <a href="#" class="btn btn-primary mt-3">Commander</a>
+                                    <a id="id-<?= $resultProductsOfCategories['categoriesId'] ?>" onclick="add_panier('<?= $resultProductsOfCategories['productsName'] ?>', '<?= $resultProductsOfCategories['categoriesId'] ?>')" class="btn btn-primary mt-3">Commander</a>
                                 </div>
                             </div>
                         </li>
@@ -89,6 +89,7 @@ require_once '../../database/database.php';
         </div>
     <?php endwhile; ?>
 
+    <script src="home.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta1/dist/js/bootstrap.bundle.min.js" integrity="sha384-ygbV9kiqUc6oa4msXn9868pTtWMgiQaeYH7/t7LECLbyPA2x65Kgf80OJFdroafW" crossorigin="anonymous"></script>
 </body>
 
