@@ -44,7 +44,7 @@ if (isset($_SESSION['auth'])) : ?>
                         <span class="border-li bg-primary rounded-pill ms-2"></span>
                     </li>
                     <li class="nav-item d-flex flex-column px-lg-3">
-                        <a class="nav-link text-dark" href="">Déconnexion</a>
+                        <a onclick="disconnect()" class="nav-link text-dark" href="">Déconnexion</a>
                         <span class="border-li bg-secondary rounded-pill ms-2"></span>
                     </li>
                     <?php if ($userConnexion->rank == 1) : ?>

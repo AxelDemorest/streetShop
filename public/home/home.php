@@ -34,7 +34,6 @@ require_once '../../database/database.php';
             <?php
 
             $reqFetchProducts = $pdo->query('SELECT * FROM Products');
-
             while ($result = $reqFetchProducts->fetch(PDO::FETCH_ASSOC)) :
             ?>
                 <li class="me-3">
@@ -45,7 +44,7 @@ require_once '../../database/database.php';
                         <div class="card-body d-flex flex-column justify-content-end">
                             <h5 class="card-title text-center"><?php echo $result['productsName'] ?></h5>
                             <p class="card-text text-center mb-0"><?php echo $result['price'] ?>€</p>
-                            <a id="id-<?= $result['productsId'] ?>" onclick="add_panier('<?= $result['productsName'] ?>', '<?= $result['categoriesId'] ?>')" class="btn btn-primary mt-3">Commander</a>
+                            <a onclick="add_panier('<?php echo $result['productsName'] ?>')" class="btn btn-primary mt-3">Commander</a>
                         </div>
                     </div>
                 </li>
@@ -79,7 +78,7 @@ require_once '../../database/database.php';
                                 <div class="card-body d-flex flex-column justify-content-end">
                                     <h5 class="card-title text-center"><?php echo $resultProductsOfCategories['productsName'] ?></h5>
                                     <p class="card-text text-center mb-0"><?php echo $resultProductsOfCategories['price'] ?>€</p>
-                                    <a id="id-<?= $resultProductsOfCategories['categoriesId'] ?>" onclick="add_panier('<?= $resultProductsOfCategories['productsName'] ?>', '<?= $resultProductsOfCategories['categoriesId'] ?>')" class="btn btn-primary mt-3">Commander</a>
+                                    <a id="id-<?= $resultProductsOfCategories['categoriesId'] ?>" onclick="add_panier('<?= $resultProductsOfCategories['productsName'] ?>')" class="btn btn-primary mt-3">Commander</a>
                                 </div>
                             </div>
                         </li>
@@ -90,6 +89,7 @@ require_once '../../database/database.php';
     <?php endwhile; ?>
 
     <script src="home.js"></script>
+    <script src="../../website_part/header.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta1/dist/js/bootstrap.bundle.min.js" integrity="sha384-ygbV9kiqUc6oa4msXn9868pTtWMgiQaeYH7/t7LECLbyPA2x65Kgf80OJFdroafW" crossorigin="anonymous"></script>
 </body>
 
