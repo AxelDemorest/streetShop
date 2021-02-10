@@ -26,6 +26,11 @@ if (isset($_SESSION['auth'])) : ?>
                     <li class="nav-item d-flex flex-column px-lg-3 pt-2 pt-lg-0">
                         <a class="nav-link text-dark" aria-current="page" href="http://localhost:8888/streetShop/public/home/home.php">Accueil</a>
                         <span class="border-li bg-primary rounded-pill ms-2"></span>
+                        <ul id = test>
+                            <li class = teste><a>Zeregtd</a></li>
+                            <li class = teste><a>Zeredfzgtd</a></li>
+                        </ul>
+                    </li>
                     </li>
                     <li class="nav-item d-flex flex-column px-lg-3">
                         <a class="nav-link text-dark" href="#">Panier</a>
@@ -66,7 +71,6 @@ if (isset($_SESSION['auth'])) : ?>
                     <li class="nav-item d-flex flex-column px-lg-3 pt-2 pt-lg-0">
                         <a class="nav-link text-dark" aria-current="page" href="">Accueil</a>
                         <span class="border-li bg-primary rounded-pill ms-2"></span>
-                    </li>
                     <li class="nav-item d-flex flex-column px-lg-3">
                         <a class="nav-link text-dark" href="#">Panier</a>
                         <span class="border-li bg-primary rounded-pill ms-2"></span>
