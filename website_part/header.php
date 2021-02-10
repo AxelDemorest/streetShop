@@ -1,5 +1,7 @@
 <?php
 
+$reqFetchCategories = $pdo->query('SELECT * FROM categories');
+
 if (isset($_SESSION['auth'])) : ?>
 
     <?php $user = $_SESSION['auth'];
@@ -9,8 +11,6 @@ if (isset($_SESSION['auth'])) : ?>
     $reqFetchUser->execute([$user->email]);
 
     $userConnexion = $reqFetchUser->fetch();
-
-    $reqFetchCategories = $pdo->query('SELECT * FROM categories');
 
     ?>
 
@@ -79,6 +79,7 @@ if (isset($_SESSION['auth'])) : ?>
                                 <li><a class="link-dropdown" href="http://localhost:8888/streetShop/public/home/home.php#<?= $resultCategories['categoriesName'] ?>"><?= $resultCategories['categoriesName'] ?></a></li>
                             <?php endwhile; ?>
                         </ul>
+                    </li>
                     <li class="nav-item d-flex flex-column px-lg-3">
                         <a class="nav-link text-dark" href="#">Panier</a>
                         <span class="border-li bg-primary rounded-pill ms-2"></span>
