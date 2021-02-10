@@ -36,7 +36,7 @@ if (isset($_SESSION['auth'])) : ?>
                     </li>
                     </li>
                     <li class="nav-item d-flex flex-column px-lg-3">
-                        <a class="nav-link text-dark" href="#">Panier</a>
+                        <a class="nav-link text-dark" href="http://localhost:8888/streetShop/public/panier/panier.php">Panier</a>
                         <span class="border-li bg-primary rounded-pill ms-2"></span>
                     </li>
                     <li class="nav-item d-flex flex-column px-lg-3">
@@ -72,7 +72,7 @@ if (isset($_SESSION['auth'])) : ?>
             <div class="collapse navbar-collapse d-flex justify-content-end" style="font-size: 15px" id="navbarSupportedContent">
                 <ul class="navbar-nav mb-2 mb-lg-0 me-3" style="font-weight:400">
                     <li class="nav-item d-flex flex-column px-lg-3 pt-2 pt-lg-0">
-                        <a class="nav-link text-dark" aria-current="page" href="">Accueil</a>
+                        <a class="nav-link text-dark" aria-current="page" href="http://localhost:8888/streetShop/public/home/home.php">Accueil</a>
                         <span class="border-li bg-primary rounded-pill ms-2"></span>
                         <ul id="dropdown-class">
                             <?php while ($resultCategories = $reqFetchCategories->fetch(PDO::FETCH_ASSOC)) : ?>
@@ -81,7 +81,7 @@ if (isset($_SESSION['auth'])) : ?>
                         </ul>
                     </li>
                     <li class="nav-item d-flex flex-column px-lg-3">
-                        <a class="nav-link text-dark" href="#">Panier</a>
+                        <a class="nav-link text-dark" href="http://localhost:8888/streetShop/public/panier/panier.php">Panier</a>
                         <span class="border-li bg-primary rounded-pill ms-2"></span>
                     </li>
                     <li class="nav-item d-flex flex-column px-lg-3">

@@ -1,12 +1,12 @@
 var xhr = new XMLHttpRequest();
 
-function add_panier(productName, productID) {
+function add_panier(productName) {
 
     xhr.onreadystatechange = function () {
 
         if (xhr.readyState == 4 && xhr.status == 200) {
 
-            alert(`Commande effectuée avec succès !`)
+            alert(`Ajouté au panier avec succès !`)
 
         }
     };

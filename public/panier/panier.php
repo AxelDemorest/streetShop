@@ -17,26 +17,46 @@ require_once '../../database/database.php';
 </head>
 
 <body>
-    <?php 
+    <?php
     require "../../website_part/header.php";
-   
-    if (isset($_SESSION['panier'])){
-    
-    $tablPanier = $_SESSION['panier'];
-    $taille = count($tablPanier);
-    for ($i=0; $i < $taille; $i++){
+
+    if (isset($_SESSION['panier'])) :
+
+        $tablPanier = $_SESSION['panier'];
+        $taille = count($tablPanier);
 
     ?>
+        <h1 class="pm-text text-center mt-4">Panier</h1>
 
-    <div class="card-body d-flex flex-column justify-content-end">
-        <h5 class="card-title text-center"><?php echo $tablPanier[$i]; ?></h5>
-    </div>
-    
-    <?php 
-    }
-    }
-    ?>
+        <div class="d-flex flex-column align-items-center mt-5 mb-5">
+            <?php for ($i = 0; $i < $taille; $i++) :
+
+                $reqFetchProductsOfPanier = $pdo->prepare('SELECT * FROM Products WHERE productsName = ?');
+
+                $reqFetchProductsOfPanier->execute([$tablPanier[$i]]);
+
+                $result = $reqFetchProductsOfPanier->fetch(PDO::FETCH_ASSOC);
+            ?>
+                <div class="w-50 rounded shadow-sm mb-5 d-flex flex-row p-3 align-items-center justify-content-between">
+                    <div class="d-flex flex-row align-items-center">
+                        <img src="<?= $result['productsImg'] ?>" width="10%" alt="">
+                        <div class="d-flex flex-column ms-4">
+                            <p class="text-muted fw-light">Nom du produit :</p>
+                            <h5 class="card-title text-start mt-1"><?php echo $tablPanier[$i]; ?></h5>
+                        </div>
+                        <div class="d-flex flex-column ms-5">
+                            <p class="text-muted fw-light">Prix du produit :</p>
+                            <h5 class="card-title text-start mt-1"><?php echo $result['price']; ?>€</h5>
+                        </div>
+                    </div>
+                    <button class="btn btn-danger" style="max-width:10em;font-size:13px">Supprimer</button>
+                </div>
+            <?php endfor; ?>
+            <button class="btn btn-success" style="max-width:10em;font-size:17px">Valider le panier</button>
+        </div>
+
+    <?php endif; ?>
+
 </body>
+
 </html>
-
-
