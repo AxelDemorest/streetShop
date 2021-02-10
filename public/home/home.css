@@ -1,12 +1,15 @@
 html{
     background-color:white;
-    
+}
+
+ul {
+    list-style: none !important;
 }
 
 #fond{
     background-color: white;
     width: 75%;
-    height: 500px;
+    min-height: 500px;
     margin: auto;
     margin-top: 75px;
     box-shadow: 5px 5px 10px grey;

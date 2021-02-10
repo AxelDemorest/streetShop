@@ -12,7 +12,7 @@ if (isset($_SESSION['auth'])) : ?>
 
     ?>
 
-    <!-- Navbar de l'utilisateur non connecté -->
+    <!-- Navbar de l'utilisateur connecté -->
     <nav class="navbar sticky-top navbar-light navbar-expand-xl bg-white fz-text shadow-sm d-flex align-items-center">
         <div class="container-fluid">
             <a class="navbar-brand d-flex align-items-center ms-3 pm-text" href="">
