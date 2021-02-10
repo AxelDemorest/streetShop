@@ -1,0 +1,21 @@
+html{
+    background-color:white;
+    
+}
+
+#fond{
+    background-color: white;
+    width: 75%;
+    height: 500px;
+    margin: auto;
+    margin-top: 75px;
+    box-shadow: 5px 5px 10px grey;
+    border-radius: 10px ;
+    
+}
+
+h1{
+    padding-top: 15px ;
+    font-size: 40px!important;
+    text-align: center;
+}
