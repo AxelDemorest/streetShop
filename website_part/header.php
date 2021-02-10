@@ -10,6 +10,8 @@ if (isset($_SESSION['auth'])) : ?>
 
     $userConnexion = $reqFetchUser->fetch();
 
+    $reqFetchCategories = $pdo->query('SELECT * FROM categories');
+
     ?>
 
     <!-- Navbar de l'utilisateur connecté -->
@@ -26,9 +28,10 @@ if (isset($_SESSION['auth'])) : ?>
                     <li class="nav-item d-flex flex-column px-lg-3 pt-2 pt-lg-0">
                         <a class="nav-link text-dark" aria-current="page" href="http://localhost:8888/streetShop/public/home/home.php">Accueil</a>
                         <span class="border-li bg-primary rounded-pill ms-2"></span>
-                        <ul id = test>
-                            <li class = teste><a>Zeregtd</a></li>
-                            <li class = teste><a>Zeredfzgtd</a></li>
+                        <ul id="dropdown-class">
+                            <?php while ($resultCategories = $reqFetchCategories->fetch(PDO::FETCH_ASSOC)) : ?>
+                                <li><a class="link-dropdown" href="http://localhost:8888/streetShop/public/home/home.php#<?= $resultCategories['categoriesName'] ?>"><?= $resultCategories['categoriesName'] ?></a></li>
+                            <?php endwhile; ?>
                         </ul>
                     </li>
                     </li>
@@ -71,6 +74,11 @@ if (isset($_SESSION['auth'])) : ?>
                     <li class="nav-item d-flex flex-column px-lg-3 pt-2 pt-lg-0">
                         <a class="nav-link text-dark" aria-current="page" href="">Accueil</a>
                         <span class="border-li bg-primary rounded-pill ms-2"></span>
+                        <ul id="dropdown-class">
+                            <?php while ($resultCategories = $reqFetchCategories->fetch(PDO::FETCH_ASSOC)) : ?>
+                                <li><a class="link-dropdown" href="http://localhost:8888/streetShop/public/home/home.php#<?= $resultCategories['categoriesName'] ?>"><?= $resultCategories['categoriesName'] ?></a></li>
+                            <?php endwhile; ?>
+                        </ul>
                     <li class="nav-item d-flex flex-column px-lg-3">
                         <a class="nav-link text-dark" href="#">Panier</a>
                         <span class="border-li bg-primary rounded-pill ms-2"></span>

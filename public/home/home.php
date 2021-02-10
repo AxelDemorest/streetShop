@@ -62,11 +62,11 @@ require_once '../../database/database.php';
 
         $reqFetchProductsOfCategories->execute([$resultCategories->categoriesName]);
     ?>
+        <div id="<?= $resultCategories->categoriesName ?>">
             <div id="fond" class="pb-5">
-
                 <h1 class="pm-text">Les <?= $resultCategories->categoriesName ?></h1>
 
-                <ul lass="mt-5 d-flex flex-row" style="overflow-x:auto">
+                <ul class="mt-5 mx-4 d-flex flex-row" style="overflow-x:auto">
                     <?php
 
                     while ($resultProductsOfCategories = $reqFetchProductsOfCategories->fetch(PDO::FETCH_ASSOC)) :
@@ -85,8 +85,8 @@ require_once '../../database/database.php';
                         </li>
                     <?php endwhile; ?>
                 </ul>
-
             </div>
+        </div>
     <?php endwhile; ?>
 
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta1/dist/js/bootstrap.bundle.min.js" integrity="sha384-ygbV9kiqUc6oa4msXn9868pTtWMgiQaeYH7/t7LECLbyPA2x65Kgf80OJFdroafW" crossorigin="anonymous"></script>

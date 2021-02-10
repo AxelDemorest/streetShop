@@ -1,6 +1,5 @@
 @import url('https://fonts.googleapis.com/css2?family=Quicksand:wght@500&display=swap');
 @import url('https://fonts.googleapis.com/css2?family=Permanent+Marker&display=swap');
-
 .fz-text {
     font-family: 'Quicksand', sans-serif;
 }
@@ -27,41 +26,39 @@
     text-decoration: underline;
 }
 
-li {
-    list-style:none !important;
-    
-    text-decoration:none;
-    color: black;
-    }
-     
-    nav ul {
-    padding:0;
-    margin:0;
+nav ul {
+    padding: 0;
+    margin: 0;
     display: flex;
-    justify-content:center;
-    justify-content: space-around;
+    justify-content: center;
     margin-left: 5px;
-    }
-     
-    li :hover {
-    color:red;
-    cursor: pointer;
-    }
+}
 
-    nav ul li ul { 
-        display:none; 
-        } /* Rend le menu déroulant caché par défaut */
-     
-    nav ul li:hover ul { /* Affiche la dropNav au survol de la souris avec la class .drop */
-    display:list-item !important;
+.link-dropdown {
+    color: black;
+    text-decoration: none;
+}
+
+li :hover {
+    color: #0d6efd;
+    cursor: pointer;
+}
+
+#dropdown-class {
+    display: none;
+}
+
+nav ul li:hover #dropdown-class {
+    /* Affiche la dropNav au survol de la souris avec la class .drop */
+    display: list-item !important;
     position: absolute;
     background-color: white;
-    margin-top:40px;
+    margin-top: 40px;
     box-shadow: 5px 5px 10px grey;
-    padding: 10px;
-    
-    }
-     
-    nav ul li:hover ul li {
-    float:none;
-    }
+    padding: 15px;
+    border-radius: 4px;
+}
+
+nav ul li:hover #dropdown-class li {
+    float: none;
+}
