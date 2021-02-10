@@ -25,19 +25,25 @@ require_once '../../database/database.php';
         $tablPanier = $_SESSION['panier'];
         $taille = count($tablPanier);
 
+        $arrayPrices = array();
+
     ?>
         <h1 class="pm-text text-center mt-4">Panier</h1>
 
         <div class="d-flex flex-column align-items-center mt-5 mb-5">
             <?php for ($i = 0; $i < $taille; $i++) :
 
-                $reqFetchProductsOfPanier = $pdo->prepare('SELECT * FROM Products WHERE productsName = ?');
+                $reqFetchProductsOfPanier = $pdo->prepare('SELECT * FROM Products WHERE productsName = ?
+                ');
 
                 $reqFetchProductsOfPanier->execute([$tablPanier[$i]]);
 
                 $result = $reqFetchProductsOfPanier->fetch(PDO::FETCH_ASSOC);
+
+                array_push($arrayPrices, $result['price']);
+
             ?>
-                <div class="w-50 rounded shadow-sm mb-5 d-flex flex-row p-3 align-items-center justify-content-between">
+                <div class="w-50 rounded shadow-sm mb-4 d-flex flex-row p-3 align-items-center justify-content-between">
                     <div class="d-flex flex-row align-items-center">
                         <img src="<?= $result['productsImg'] ?>" width="10%" alt="">
                         <div class="d-flex flex-column ms-4">
@@ -52,11 +58,15 @@ require_once '../../database/database.php';
                     <button class="btn btn-danger" style="max-width:10em;font-size:13px">Supprimer</button>
                 </div>
             <?php endfor; ?>
+
+                <h5 class="mb-4">Prix total à payer : <?= array_sum($arrayPrices) ?>€</h5>
             <button class="btn btn-success" style="max-width:10em;font-size:17px">Valider le panier</button>
         </div>
 
     <?php endif; ?>
 
+    <script src="../ajax/ajax.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta1/dist/js/bootstrap.bundle.min.js" integrity="sha384-ygbV9kiqUc6oa4msXn9868pTtWMgiQaeYH7/t7LECLbyPA2x65Kgf80OJFdroafW" crossorigin="anonymous"></script>
 </body>
 
 </html>
