@@ -20,7 +20,7 @@ require_once '../../database/database.php';
     <?php
     require "../../website_part/header.php";
 
-    if (isset($_SESSION['panier'])) :
+    if (isset($_SESSION['panier']) && !empty($_SESSION['panier'])) :
 
         $tablPanier = $_SESSION['panier'];
         $taille = count($tablPanier);
@@ -31,12 +31,12 @@ require_once '../../database/database.php';
         <h1 class="pm-text text-center mt-4">Panier</h1>
 
         <div class="d-flex flex-column align-items-center mt-5 mb-5">
-            <?php for ($i = 0; $i < $taille; $i++) :
 
-                $reqFetchProductsOfPanier = $pdo->prepare('SELECT * FROM Products WHERE productsName = ?
-                ');
+            <?php foreach ($tablPanier as $key => $value) :
 
-                $reqFetchProductsOfPanier->execute([$tablPanier[$i]]);
+                $reqFetchProductsOfPanier = $pdo->prepare('SELECT * FROM Products WHERE productsName = ?');
+
+                $reqFetchProductsOfPanier->execute([$value]);
 
                 $result = $reqFetchProductsOfPanier->fetch(PDO::FETCH_ASSOC);
 
@@ -48,20 +48,41 @@ require_once '../../database/database.php';
                         <img src="<?= $result['productsImg'] ?>" width="10%" alt="">
                         <div class="d-flex flex-column ms-4">
                             <p class="text-muted fw-light">Nom du produit :</p>
-                            <h5 class="card-title text-start mt-1"><?php echo $tablPanier[$i]; ?></h5>
+                            <h5 class="card-title text-start mt-1"><?php echo $value; ?></h5>
                         </div>
                         <div class="d-flex flex-column ms-5">
                             <p class="text-muted fw-light">Prix du produit :</p>
                             <h5 class="card-title text-start mt-1"><?php echo $result['price']; ?>€</h5>
                         </div>
                     </div>
-                    <button class="btn btn-danger" style="max-width:10em;font-size:13px">Supprimer</button>
+                    <button onclick="supp_product_panier('<?= $key ?>')" class="btn btn-danger" style="max-width:10em;font-size:13px">Supprimer</button>
                 </div>
-            <?php endfor; ?>
+            <?php endforeach; ?>
 
-                <h5 class="mb-4">Prix total à payer : <?= array_sum($arrayPrices) ?>€</h5>
-            <button class="btn btn-success" style="max-width:10em;font-size:17px">Valider le panier</button>
+            <h5 class="mb-4">Prix total à payer : <?= array_sum($arrayPrices) ?>€</h5>
+
+            <?php if (isset($_SESSION['auth'])) : ?>
+
+                <div class="d-flex flex-row">
+                    <button onclick="supp_all_product_panier()" class="btn btn-danger me-4" style="max-width:15em;font-size:17px">Supprimer le panier</button>
+                    <button class="btn btn-success" style="max-width:10em;font-size:17px">Valider le panier</button>
+                </div>
+
+
+            <?php else : ?>
+
+                <p>Vous devez être connecté pour valider votre commande</p>
+                <div class="d-flex flex-row">
+                    <button onclick="supp_all_product_panier()" class="btn btn-danger me-4" style="max-width:15em;font-size:17px">Supprimer le panier</button>
+                    <button class="btn btn-success disabled" style="max-width:10em;font-size:17px">Valider le panier</button>
+                </div>
+
+            <?php endif; ?>
         </div>
+
+    <?php else : ?>
+
+        <h1 class="pm-text text-center mt-4">Le panier est vide</h1>
 
     <?php endif; ?>
 

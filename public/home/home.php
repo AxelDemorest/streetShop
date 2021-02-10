@@ -44,7 +44,7 @@ require_once '../../database/database.php';
                         <div class="card-body d-flex flex-column justify-content-end">
                             <h5 class="card-title text-center"><?php echo $result['productsName'] ?></h5>
                             <p class="card-text text-center mb-0"><?php echo $result['price'] ?>€</p>
-                            <a onclick="add_panier('<?php echo $result['productsName'] ?>')" class="btn btn-primary mt-3">Commander</a>
+                            <a onclick="add_panier('<?php echo $result['productsName'] ?>', '<?= $result['productsId'] ?>')" class="btn btn-primary mt-3">Commander</a>
                         </div>
                     </div>
                 </li>
@@ -78,7 +78,7 @@ require_once '../../database/database.php';
                                 <div class="card-body d-flex flex-column justify-content-end">
                                     <h5 class="card-title text-center"><?php echo $resultProductsOfCategories['productsName'] ?></h5>
                                     <p class="card-text text-center mb-0"><?php echo $resultProductsOfCategories['price'] ?>€</p>
-                                    <a id="id-<?= $resultProductsOfCategories['categoriesId'] ?>" onclick="add_panier('<?= $resultProductsOfCategories['productsName'] ?>')" class="btn btn-primary mt-3">Commander</a>
+                                    <a id="id-<?= $resultProductsOfCategories['categoriesId'] ?>" onclick="add_panier('<?= $resultProductsOfCategories['productsName'] ?>', '<?= $resultProductsOfCategories['productsId'] ?>')" class="btn btn-primary mt-3">Commander</a>
                                 </div>
                             </div>
                         </li>

@@ -1,6 +1,6 @@
 var xhr = new XMLHttpRequest();
 
-function add_panier(productName) {
+function add_panier(productName, productId) {
 
     xhr.onreadystatechange = function () {
 
@@ -11,12 +11,12 @@ function add_panier(productName) {
         }
     };
 
-    xhr.open("POST", 'add_panier.php', true);
+    xhr.open("POST", '../php_ajax/add_panier.php', true);
 
     xhr.responseType = "text";
 
     xhr.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
 
-    xhr.send("product=" + productName);
+    xhr.send(`product=${productName}&productId=${productId}`);
 
 }
