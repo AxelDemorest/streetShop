@@ -1,6 +1,10 @@
 @import url('https://fonts.googleapis.com/css2?family=Quicksand:wght@500&display=swap');
 @import url('https://fonts.googleapis.com/css2?family=Permanent+Marker&display=swap');
 
+ul {
+    list-style: none !important;
+}
+
 .fz-text {
     font-family: 'Quicksand', sans-serif;
 }
