@@ -1,0 +1,35 @@
+html{
+    background-color:white;
+}
+
+#fond{
+    background-color: white;
+    width: 83%;
+    min-height: 500px;
+    margin: auto;
+    float: right;
+    
+}
+
+h1{
+    padding-top: 15px ;
+    font-size: 40px!important;
+    text-align: center;
+}
+
+#table{
+    background-color:white;
+    box-shadow: 5px 5px 10px grey;
+    width: 83%;
+    margin: auto;
+    text-align: center;
+    border-radius: 20px;
+}
+#side_bar{
+    background-color:white;
+    width: 15%;
+    float: left;
+    height: 1000px;
+    box-shadow: 5px 5px 10px grey;
+
+}
