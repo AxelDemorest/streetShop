@@ -4,6 +4,8 @@ session_start();
 
 require_once '../../database/database.php';
 
+require "admin_functions.php";
+
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -17,34 +19,54 @@ require_once '../../database/database.php';
     <link rel="stylesheet" href="../../website_part/header.css">
     <title>Administration</title>
 </head>
-<body class="pb-5">
 
-<div id = side_bar>
-<a class="nav-link text-dark" href="http://localhost:8888/streetShop/public/home/home.php">Accueil</a>
+<body>
 
-<a class="nav-link text-dark" href=""> Déconnexion</a>
-                        
-</div>
-    <div id = fond>
-        <h1 class="pm-text">Administrateur</h1>
-<div id = table>
-    <button>Add</button><br>
-        <?php
-    $test = $pdo->query("SELECT * FROM Users ");
-    while($recup = $test->fetch(PDO::FETCH_ASSOC)){
-        echo $recup['firstName']. " . " .$recup['email'];
-        ?>
-        <button><a href= supp_admin.php?id="$recup[0]">Delete</a></button>
-        <?php
-        echo("  <button>Edit</button>");
-        echo("<br>");
-        echo("<br>");
-        
-    }
-?>
-</div>
+    <div class="d-flex flex-row">
+        <div id="side_bar" class="d-flex flex-column align-items-center">
+            <h2 class="pm-text text-white mt-3" style="opacity:0.6">StreetShop</h2>
+            <ul id="list-sidebar" class="ps-0 pt-3">
+                <li class="pt-1"><a href="" class="text-decoration-none text-white fw-light" style="opacity:0.6">Accueil</a></li>
+                <li class="pt-4"><a href="" class="text-decoration-none text-white fw-light" style="opacity:0.6">Utilisateurs</a></li>
+                <li class="pt-4"><a href="" class="text-decoration-none text-white fw-light" style="opacity:0.6">Catégories</a></li>
+                <li class="pt-4"><a href="" class="text-decoration-none text-white fw-light" style="opacity:0.6">Produits</a></li>
+                <li class="pt-4"><a href="" class="text-decoration-none text-white fw-light" style="opacity:0.6">Commandes</a></li>
+            </ul>
+        </div>
 
 
+        <div class="d-flex flex-column align-items-center" style="width:85%">
+            <div class="w-100 border-2 border-bottom d-flex flex-row align-items-center justify-content-end" style="height:3em">
+                <img src="../../img/lock.png" class="me-2" width="20px" alt="">
+                <p class="fz-text me-3 mb-0">Connecté en tant que <?= $_SESSION['auth']->lastName ?></p>
+            </div>
+            <h1 class="pm-text">Administrateur</h1>
+            <div class="d-flex flex-row flex-wrap mt-4">
+                <div class="rounded border border-2 shadow-sm p-4 ">
+                    <?php if (!empty($errors)) : ?>
+                        <div class="alert alert-danger pb-0 mx-auto" style="font-size:14px">
+                            <ul class="ps-0">
+
+                                <?php foreach ($errors as $error) : ?>
+
+                                    <li><?= $error; ?></li>
+
+                                <?php endforeach; ?>
+
+                            </ul>
+                        </div>
+
+                    <?php endif; ?>
+                    <form action="" class="d-flex flex-column" method="POST">
+                        <input name="userSupp" class="border border-1 rounded shadow-sm fw-light text-center" style="opacity:0.6" type="text" placeholder="e-mail de l'utilisateur">
+                        <input name="submitSupp" class="btn btn-danger mt-4" type="submit" value="Supprimer l'utilisateur">
+                    </form>
+                </div>
+
+            </div>
+        </div>
     </div>
+
 </body>
+
 </html>

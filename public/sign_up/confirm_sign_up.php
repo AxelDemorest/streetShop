@@ -44,7 +44,7 @@ if (!empty($_POST)) {
 
             $password = password_hash($password, PASSWORD_BCRYPT);
 
-            $req->execute([$lastName, $firstName, $email, $_POST['genderRadios'], $password]);
+            $req->execute([$firstName, $lastName, $email, $_POST['genderRadios'], $password]);
 
             $reqFetchUser = $pdo->prepare("SELECT * FROM Users WHERE email = ?");
 
