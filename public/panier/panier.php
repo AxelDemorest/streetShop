@@ -20,30 +20,35 @@ require_once '../../database/database.php';
     <?php
     require "../../website_part/header.php";
 
-    if (isset($_SESSION['panier']) && !empty($_SESSION['panier'])) :
+    if (isset($_SESSION['panier']) && !empty($_SESSION['panier'])) : // Si le panier est vide ou qu'il n'existe pas
 
         $tablPanier = $_SESSION['panier'];
         $taille = count($tablPanier);
 
-        $arrayPrices = array();
+        $arrayPrices = array(); // Je crée un tableau vide
 
     ?>
+
         <h1 class="pm-text text-center mt-4">Panier</h1>
+
+        <div class="alert alert-success w-25 text-center mx-auto mt-4" id="alert-ajax" role="alert" style="display:none;">
+            Commande effectuée avec succès
+        </div>
 
         <div class="d-flex flex-column align-items-center mt-5 mb-5">
 
-            <?php foreach ($tablPanier as $key => $value) :
+            <?php foreach ($tablPanier as $key => $value) : // Je parcours le panier ($value c'est les noms des produits et key c'est leurs id)
 
-                $reqFetchProductsOfPanier = $pdo->prepare('SELECT * FROM Products WHERE productsName = ?');
+                $reqFetchProductsOfPanier = $pdo->prepare('SELECT * FROM Products WHERE productsName = ?'); // Je récupère toutes les infos de chaque produit à chaque tour de boucle grâce à Value
 
                 $reqFetchProductsOfPanier->execute([$value]);
 
-                $result = $reqFetchProductsOfPanier->fetch(PDO::FETCH_ASSOC);
+                $result = $reqFetchProductsOfPanier->fetch(PDO::FETCH_ASSOC); // Je récupère les infos de la requête sous forme de tableau
 
-                array_push($arrayPrices, $result['price']);
+                array_push($arrayPrices, $result['price']); // Je push le prix dans mon tableau prix
 
             ?>
-                <div class="w-50 rounded shadow-sm mb-4 d-flex flex-row p-3 align-items-center justify-content-between">
+                <div class="w-50 rounded shadow-sm mb-4 flex-row p-3 align-items-center justify-content-between all_panier" style="display:flex;">
                     <div class="d-flex flex-row align-items-center">
                         <img src="<?= $result['productsImg'] ?>" width="10%" alt="">
                         <div class="d-flex flex-column ms-4">
@@ -59,25 +64,31 @@ require_once '../../database/database.php';
                 </div>
             <?php endforeach; ?>
 
-            <h5 class="mb-4">Prix total à payer : <?= array_sum($arrayPrices) ?>€</h5>
+            <div class="button_group">
 
-            <?php if (isset($_SESSION['auth'])) : ?>
+                <h5 class="mb-4 text-center">Prix total à payer : <?= array_sum($arrayPrices) ?>€</h5>
 
-                <div class="d-flex flex-row">
-                    <button onclick="supp_all_product_panier()" class="btn btn-danger me-4" style="max-width:15em;font-size:17px">Supprimer le panier</button>
-                    <button class="btn btn-success" style="max-width:10em;font-size:17px">Valider le panier</button>
-                </div>
+                <?php if (isset($_SESSION['auth'])) : // Si l'user est connecté, il peut valider son panier, sinon non 
+                ?>
 
+                    <div class="flex-row" style="display:flex">
+                        <button onclick="supp_all_product_panier()" class="btn btn-danger me-4" style="max-width:15em;font-size:17px">Supprimer le panier</button>
+                        <button onclick="validation_panier()" class="btn btn-success" style="max-width:10em;font-size:17px">Valider le panier</button>
+                    </div>
+            </div>
 
-            <?php else : ?>
+        <?php else : ?>
 
+            <div class="button_group">
                 <p>Vous devez être connecté pour valider votre commande</p>
-                <div class="d-flex flex-row">
+                <div class="flex-row" style="display:flex">
                     <button onclick="supp_all_product_panier()" class="btn btn-danger me-4" style="max-width:15em;font-size:17px">Supprimer le panier</button>
-                    <button class="btn btn-success disabled" style="max-width:10em;font-size:17px">Valider le panier</button>
+                    <button onclick="validation_panier()" class="btn btn-success disabled" style="max-width:10em;font-size:17px">Valider le panier</button>
                 </div>
+            </div>
 
-            <?php endif; ?>
+
+        <?php endif; ?>
         </div>
 
     <?php else : ?>
