@@ -49,7 +49,7 @@ if (isset($_SESSION['auth'])) : ?>
                     </li>
                     <?php if ($userConnexion->rank == 1) : ?>
                         <li class="nav-item d-flex flex-column px-lg-3">
-                            <a class="nav-link text-dark" href="">Administration</a>
+                            <a class="nav-link text-dark" href="http://localhost:8888/streetShop/public/admin/dashboard.php">Administration</a>
                             <span class="border-li bg-secondary rounded-pill ms-2"></span>
                         </li>
                     <?php endif; ?>
