@@ -11,7 +11,7 @@ h1{
 #side_bar{
     background-color:#353950;
     width: 15%;
-    height: 100vh;
+    min-height: 100vh;
 }
 
 #list-sidebar li:hover {

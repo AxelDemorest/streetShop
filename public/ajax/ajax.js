@@ -82,3 +82,72 @@ function validation_panier() {
     xhr.send();
 
 }
+
+function become_admin(userId) {
+
+    xhr.onreadystatechange = function () {
+
+        if (xhr.readyState == 4 && xhr.status == 200) {
+
+            alert("Promotion effectuée !");
+
+            document.location.reload();
+
+        }
+    };
+
+    xhr.open("POST", '../php_ajax/become_admin.php', true);
+
+    xhr.responseType = "text";
+
+    xhr.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
+
+    xhr.send("userId=" + userId);
+
+}
+
+function supp_category(category_id) {
+
+    xhr.onreadystatechange = function () {
+
+        if (xhr.readyState == 4 && xhr.status == 200) {
+
+            alert("Catégorie supprimée !");
+
+            document.location.reload();
+
+        }
+    };
+
+    xhr.open("POST", '../php_ajax/supp_category.php', true);
+
+    xhr.responseType = "text";
+
+    xhr.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
+
+    xhr.send("categoryId=" + category_id);
+
+}
+
+function supp_product(product_id) {
+
+    xhr.onreadystatechange = function () {
+
+        if (xhr.readyState == 4 && xhr.status == 200) {
+
+            alert("Produit supprimé !");
+
+            document.location.reload();
+
+        }
+    };
+
+    xhr.open("POST", '../php_ajax/supp_product.php', true);
+
+    xhr.responseType = "text";
+
+    xhr.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
+
+    xhr.send("productId=" + product_id);
+
+}
