@@ -25,6 +25,10 @@ foreach ($_SESSION['panier'] as $key => $value) {
     ");
     
     $req2->execute([$_SESSION['panierQuantity'][$key], $key, $fetchOrder['ordersId']]);
+
+    $req = $pdo->prepare("UPDATE Products SET productsStock = productsStock + ? WHERE productsId = ?");
+
+    $req->execute([$_SESSION['panierQuantity'][$key], $key]);
 }
 
 unset($_SESSION['panier']);

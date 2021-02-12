@@ -40,7 +40,7 @@ if (isset($_SESSION['auth'])) : ?>
                         <span class="border-li bg-primary rounded-pill ms-2"></span>
                     </li>
                     <li class="nav-item d-flex flex-column px-lg-3">
-                        <a class="nav-link text-dark" href="#">Profil</a>
+                        <a class="nav-link text-dark" href="http://localhost:8888/streetShop/public/account/account.php">Profil</a>
                         <span class="border-li bg-primary rounded-pill ms-2"></span>
                     </li>
                     <li class="nav-item d-flex flex-column px-lg-3">
@@ -82,10 +82,6 @@ if (isset($_SESSION['auth'])) : ?>
                     </li>
                     <li class="nav-item d-flex flex-column px-lg-3">
                         <a class="nav-link text-dark" href="http://localhost:8888/streetShop/public/panier/panier.php">Panier</a>
-                        <span class="border-li bg-primary rounded-pill ms-2"></span>
-                    </li>
-                    <li class="nav-item d-flex flex-column px-lg-3">
-                        <a class="nav-link text-dark" href="#">Profil</a>
                         <span class="border-li bg-primary rounded-pill ms-2"></span>
                     </li>
                     <li class="nav-item d-flex flex-column px-lg-3">
