@@ -1,13 +1,21 @@
 var xhr = new XMLHttpRequest();
 
-function add_panier(productName, productId) {
+function add_panier(productName, productId, productsStock) {
 
     xhr.onreadystatechange = function () {
 
         if (xhr.readyState == 4 && xhr.status == 200) {
 
-            alert(`Ajouté au panier avec succès !`)
+            let dataElements = JSON.parse(xhr.responseText);
 
+            if(dataElements.error === "error_stock") {
+
+                document.getElementById(`card-${productId}`).classList.addClass('disabled');
+            }
+
+            alert("Produit ajouté au panier !");
+
+            document.getElementById(`stock-card-${productId}`).textContent = `${productsStock - 1} en stock`;
         }
     };
 
@@ -17,6 +25,6 @@ function add_panier(productName, productId) {
 
     xhr.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
 
-    xhr.send(`product=${productName}&productId=${productId}`);
+    xhr.send(`product=${productName}&productId=${productId}&productsStock=${productsStock}`);
 
 }

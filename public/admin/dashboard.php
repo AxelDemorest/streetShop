@@ -22,9 +22,19 @@ require "admin_functions.php";
 
 <body>
 
-    <?php if (isset($_SESSION['auth'])) : ?>
+    <?php if (isset($_SESSION['auth'])) : 
+        
+        $user = $_SESSION['auth'];
 
-        <?php if ($_SESSION['auth']->rank == 1) : ?>
+        $reqFetchUser = $pdo->prepare("SELECT * FROM Users WHERE email = ?");
+    
+        $reqFetchUser->execute([$user->email]);
+    
+        $userConnexion = $reqFetchUser->fetch();
+        
+        ?>
+
+        <?php if ($userConnexion->rank == 1) :?>
             <div class="d-flex flex-row">
                 <div id="side_bar" class="d-flex flex-column align-items-center">
                     <h2 class="pm-text text-white mt-3" style="opacity:0.6">StreetShop</h2>
@@ -166,7 +176,7 @@ require "admin_functions.php";
 
                     <div>
                         <!-- Produits -->
-                        <div class="d-flex flex-column align-items-center">
+                        <div class="d-flex flex-column align-items-center pb-5">
                             <h3 class="pm-text mt-5 mb-4">Produits</h3>
                             <div class="d-flex flex-row flex-wrap">
                                 <div class="rounded border border-2 shadow-sm pe-4 pb-4 ps-4 pt-2 d-flex flex-column align-items-center">

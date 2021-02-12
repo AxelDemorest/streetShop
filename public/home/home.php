@@ -16,7 +16,7 @@ require_once '../../database/database.php';
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-giJF6kkoqNQ00vy+HMDP7azOuL0xtbfIcaT9wjKHr8RbDVddVHyTfAAsrekwKmP1" crossorigin="anonymous">
     <link rel="stylesheet" href="../../website_part/header.css">
-    <title>Inscription - StreetShop</title>
+    <title>Accueil - StreetShop</title>
 </head>
 
 <body class="pb-5">
@@ -44,7 +44,8 @@ require_once '../../database/database.php';
                         <div class="card-body d-flex flex-column justify-content-end">
                             <h5 class="card-title text-center"><?php echo $result['productsName'] ?></h5>
                             <p class="card-text text-center mb-0"><?php echo $result['price'] ?>€</p>
-                            <a onclick="add_panier('<?php echo $result['productsName'] ?>', '<?= $result['productsId'] ?>')" class="btn btn-primary mt-3">Commander</a>
+                            <p id="stock-card-<?= $result['productsId'] ?>" class="card-text text-center text-muted fst-italic mb-0"><?php echo $result['productsStock'] ?> en stock</p>
+                            <a onclick="add_panier('<?php echo $result['productsName'] ?>', '<?= $result['productsId'] ?>', <?= $result['productsStock'] ?>)" id="card-<?= $result['productsId'] ?>" class="btn btn-primary mt-3">Commander</a>
                         </div>
                     </div>
                 </li>
@@ -78,7 +79,8 @@ require_once '../../database/database.php';
                                 <div class="card-body d-flex flex-column justify-content-end">
                                     <h5 class="card-title text-center"><?php echo $resultProductsOfCategories['productsName'] ?></h5>
                                     <p class="card-text text-center mb-0"><?php echo $resultProductsOfCategories['price'] ?>€</p>
-                                    <a id="id-<?= $resultProductsOfCategories['categoriesId'] ?>" onclick="add_panier('<?= $resultProductsOfCategories['productsName'] ?>', '<?= $resultProductsOfCategories['productsId'] ?>')" class="btn btn-primary mt-3">Commander</a>
+                                    <p id="stock-card-<?= $resultProductsOfCategories['categoriesId'] ?>" class="card-text text-center text-muted fst-italic mb-0"><?php echo $resultProductsOfCategories['productsStock'] ?> en stock</p>
+                                    <a id="card-<?= $resultProductsOfCategories['categoriesId'] ?>" onclick="add_panier('<?= $resultProductsOfCategories['productsName'] ?>', '<?= $resultProductsOfCategories['productsId'] ?>', <?= $resultProductsOfCategories['productsStock'] ?>)" class="btn btn-primary mt-3">Commander</a>
                                 </div>
                             </div>
                         </li>
