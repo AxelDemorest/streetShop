@@ -20,11 +20,13 @@ $fetchOrder = $reqSelectOrder->fetch(PDO::FETCH_ASSOC);
 foreach ($_SESSION['panier'] as $key => $value) {
 
     $req2 = $pdo->prepare("
-    INSERT INTO OrdersLines(productsId,ordersId)
-    VALUES (?, ?)
+    INSERT INTO OrdersLines(quantity,productsId,ordersId)
+    VALUES (?, ?, ?)
     ");
     
-    $req2->execute([$key, $fetchOrder['ordersId']]);
+    $req2->execute([$_SESSION['panierQuantity'][$key], $key, $fetchOrder['ordersId']]);
 }
 
 unset($_SESSION['panier']);
+
+unset($_SESSION['panierQuantity']);

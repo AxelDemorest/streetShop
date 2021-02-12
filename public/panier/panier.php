@@ -45,7 +45,7 @@ require_once '../../database/database.php';
 
                 $result = $reqFetchProductsOfPanier->fetch(PDO::FETCH_ASSOC); // Je récupère les infos de la requête sous forme de tableau
 
-                array_push($arrayPrices, $result['price']); // Je push le prix dans mon tableau prix
+                array_push($arrayPrices, $result['price'] * $_SESSION['panierQuantity'][$result['productsId']]); // Je push le prix dans mon tableau prix
 
             ?>
                 <div class="w-50 rounded shadow-sm mb-4 flex-row p-3 align-items-center justify-content-between all_panier" style="display:flex;">
@@ -59,8 +59,12 @@ require_once '../../database/database.php';
                             <p class="text-muted fw-light">Prix du produit :</p>
                             <h5 class="card-title text-start mt-1"><?php echo $result['price']; ?>€</h5>
                         </div>
+                        <div class="d-flex flex-column ms-5">
+                            <p class="text-muted fw-light">Quantité :</p>
+                            <h5 class="card-title text-start mt-1"><?php  echo $_SESSION['panierQuantity'][$result['productsId']]; ?></h5>
+                        </div>
                     </div>
-                    <button onclick="supp_product_panier('<?= $key ?>')" class="btn btn-danger" style="max-width:10em;font-size:13px">Supprimer</button>
+                    <button onclick="supp_product_panier('<?= $value ?>', <?= $result['productsId'] ?> ,<?= $result['productsStock'] ?>)" class="btn btn-danger" style="max-width:10em;font-size:13px">Supprimer</button>
                 </div>
             <?php endforeach; ?>
 

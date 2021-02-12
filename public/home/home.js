@@ -6,16 +6,40 @@ function add_panier(productName, productId, productsStock) {
 
         if (xhr.readyState == 4 && xhr.status == 200) {
 
-            let dataElements = JSON.parse(xhr.responseText);
+            if (typeof (dataElements) != 'undefined') {
+                let dataElements = JSON.parse(xhr.responseText);
 
-            if(dataElements.error === "error_stock") {
+            if (dataElements.error == "error_stock") {
 
-                document.getElementById(`card-${productId}`).classList.addClass('disabled');
+                document.getElementById(`card-${productId}`).style.display = "none";
+
+                document.getElementById(`card2-${productId}`).style.display = "none";
+
+                document.getElementById(`text-stock-${productId}`).textContent = "Ce produit n'est plus en stock.";
+
+                document.getElementById(`text-stock-${productId}`).style.textAlign = "center";
+
+                document.getElementById(`text-stock-${productId}`).style.fontStyle = "italic";
+
+                document.getElementById(`text-stock-${productId}`).style.marginBottom = 0;
+
+                document.getElementById(`text-stock-${productId}`).style.marginTop = 2;
+
+                document.getElementById(`text-stock2-${productId}`).textContent = "Ce produit n'est plus en stock.";
+
+                document.getElementById(`text-stock2-${productId}`).style.textAlign = "center";
+
+                document.getElementById(`text-stock2-${productId}`).style.fontStyle = "italic";
+
+                document.getElementById(`text-stock2-${productId}`).style.marginBottom = 0;
+
+                document.getElementById(`text-stock2-${productId}`).style.marginTop = 2;
             }
+        }
 
             alert("Produit ajouté au panier !");
 
-            document.getElementById(`stock-card-${productId}`).textContent = `${productsStock - 1} en stock`;
+            document.location.reload();
         }
     };
 

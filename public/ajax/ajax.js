@@ -17,7 +17,7 @@ function disconnect() {
 
 }
 
-function supp_product_panier(productName) {
+function supp_product_panier(productName, productId, productsStock) {
 
     xhr.onreadystatechange = function () {
 
@@ -34,7 +34,7 @@ function supp_product_panier(productName) {
 
     xhr.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
 
-    xhr.send("product=" + productName);
+    xhr.send("product=" + productName + "&productId=" + productId + "&productsStock=" + productsStock);
 
 }
 

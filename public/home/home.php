@@ -36,8 +36,8 @@ require_once '../../database/database.php';
             $reqFetchProducts = $pdo->query('SELECT * FROM Products');
             while ($result = $reqFetchProducts->fetch(PDO::FETCH_ASSOC)) :
             ?>
-                <li class="me-3">
-                    <div class="card" style="width: 18rem;height:34em">
+                <li class="me-4">
+                    <div class="card mb-4" style="width: 18rem;height:34em">
                         <div style="height: 100%" class="d-flex align-items-center">
                             <img src="<?= $result['productsImg'] ?>" class="card-img-top" alt="...">
                         </div>
@@ -45,7 +45,11 @@ require_once '../../database/database.php';
                             <h5 class="card-title text-center"><?php echo $result['productsName'] ?></h5>
                             <p class="card-text text-center mb-0"><?php echo $result['price'] ?>€</p>
                             <p id="stock-card-<?= $result['productsId'] ?>" class="card-text text-center text-muted fst-italic mb-0"><?php echo $result['productsStock'] ?> en stock</p>
-                            <a onclick="add_panier('<?php echo $result['productsName'] ?>', '<?= $result['productsId'] ?>', <?= $result['productsStock'] ?>)" id="card-<?= $result['productsId'] ?>" class="btn btn-primary mt-3">Commander</a>
+                            <?php if ($result['productsStock'] > 0) : ?>
+                                <a onclick="add_panier('<?php echo $result['productsName'] ?>', <?= $result['productsId'] ?>, <?= $result['productsStock'] ?>)" id="card-<?= $result['productsId'] ?>" class="btn btn-primary mt-3">Commander</a>
+                            <?php else : ?>
+                                <p id="text-stock-<?= $result['productsId'] ?>" class="text-center mb-0 mt-2 fst-italic">Ce produit n'est plus en stock.</p>
+                            <?php endif; ?>
                         </div>
                     </div>
                 </li>
@@ -72,15 +76,19 @@ require_once '../../database/database.php';
                     while ($resultProductsOfCategories = $reqFetchProductsOfCategories->fetch(PDO::FETCH_ASSOC)) :
                     ?>
                         <li class="mx-3">
-                            <div class="card" style="width: 18rem;height:34em">
+                            <div class="card mb-4" style="width: 18rem;height:34em">
                                 <div style="height: 100%" class="d-flex align-items-center">
                                     <img src="<?= $resultProductsOfCategories["productsImg"] ?>" class="card-img-top" alt="...">
                                 </div>
                                 <div class="card-body d-flex flex-column justify-content-end">
                                     <h5 class="card-title text-center"><?php echo $resultProductsOfCategories['productsName'] ?></h5>
                                     <p class="card-text text-center mb-0"><?php echo $resultProductsOfCategories['price'] ?>€</p>
-                                    <p id="stock-card-<?= $resultProductsOfCategories['categoriesId'] ?>" class="card-text text-center text-muted fst-italic mb-0"><?php echo $resultProductsOfCategories['productsStock'] ?> en stock</p>
-                                    <a id="card-<?= $resultProductsOfCategories['categoriesId'] ?>" onclick="add_panier('<?= $resultProductsOfCategories['productsName'] ?>', '<?= $resultProductsOfCategories['productsId'] ?>', <?= $resultProductsOfCategories['productsStock'] ?>)" class="btn btn-primary mt-3">Commander</a>
+                                    <p id="stock-card2-<?= $resultProductsOfCategories['productsId'] ?>" class="card-text text-center text-muted fst-italic mb-0"><?php echo $resultProductsOfCategories['productsStock'] ?> en stock</p>
+                                    <?php if ($resultProductsOfCategories['productsStock'] > 0) : ?>
+                                        <a id="card2-<?= $resultProductsOfCategories['productsId'] ?>" onclick="add_panier('<?= $resultProductsOfCategories['productsName'] ?>', <?= $resultProductsOfCategories['productsId'] ?>, <?= $resultProductsOfCategories['productsStock'] ?>)" class="btn btn-primary mt-3">Commander</a>
+                                    <?php else: ?>
+                                        <p id="text-stock2-<?= $resultProductsOfCategories['productsId'] ?>" class="text-center mb-0 mt-2 fst-italic">Ce produit n'est plus en stock.</p>
+                                    <?php endif; ?>
                                 </div>
                             </div>
                         </li>
