@@ -60,7 +60,7 @@ require_once '../../database/database.php';
 
             <h1 class="pm-text mx-auto text-center mt-5">Page introuvable</h1>
 
-        <?php endif; ?>
+        <?php else: ?>
 
         <?php
 
@@ -126,6 +126,7 @@ require_once '../../database/database.php';
             </div>
 
         </div>
+        <?php endif; ?>
 
     <?php endif; ?>
 
