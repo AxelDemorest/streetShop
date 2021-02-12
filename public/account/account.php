@@ -86,7 +86,7 @@ require_once '../../database/database.php';
                 <p class="mt-3">Date de création : <?php echo $fetchUser['created_at'] ?></p>
             </div>
 
-            <div class="w-50 shadow rounded p-4 mt-5 d-flex flex-column align-items-center">
+            <div class="w-50 shadow rounded p-4 mt-5 d-flex flex-column align-items-center mb-5">
                 <h2 class="pm-text mx-auto text-center">Historique des commandes</h2>
 
                 <?php

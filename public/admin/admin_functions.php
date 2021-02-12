@@ -10,22 +10,38 @@ if (isset($_POST['submitSupp'])) {
         $errors['input'] = "Un des champs n'a pas été complété.";
         $valid = false;
     } else {
-        $reqFetchMail = $pdo->prepare('SELECT email FROM Users WHERE email = ?');
+        $reqFetchMail = $pdo->prepare('SELECT * FROM Users WHERE email = ?');
 
         $reqFetchMail->execute([$_POST['userSupp']]);
 
-        $user = $reqFetchMail->fetch();
+        $user = $reqFetchMail->fetch(PDO::FETCH_ASSOC);
 
         if (!$user) {
             $errors['useEmail'] = 'Cet utilisateur n\'existe pas.';
             $valid = false;
         }
 
+        $fetchOrders = $pdo->prepare('SELECT ordersId FROM Orders WHERE usersId = ?');
+
+        $fetchOrders->execute([$user['usersId']]);
+
+        $fetchOrders = $fetchOrders->fetchAll(PDO::FETCH_ASSOC);
+
         if ($valid && empty($errors)) {
 
-            $req = $pdo->prepare("DELETE FROM Users WHERE email = ?");
+            foreach($fetchOrders as $key => $value) {
+                $req2 = $pdo->prepare("DELETE FROM OrdersLines WHERE ordersId = ?");
 
-            $req->execute([$_POST['userSupp']]);
+                $req2->execute([$value['ordersId']]);
+            }
+
+            $req1 = $pdo->prepare("DELETE FROM Orders WHERE usersId = ?");
+
+            $req1->execute([$user['usersId']]);
+
+            $req3 = $pdo->prepare("DELETE FROM Users WHERE email = ?");
+
+            $req3->execute([$_POST['userSupp']]);
         }
     }
 }
