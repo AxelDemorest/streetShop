@@ -37,6 +37,23 @@ require_once '../../database/database.php';
 
         <?php endif; ?>
 
+        <div class="d-flex flex-column align-items-center mt-5">
+            <div class="w-50 shadow rounded p-4 d-flex flex-column align-items-center">
+                <h2 class="pm-text mx-auto text-center">Informations du compte</h2>
+                <p class="mt-4">E-mail : <?= $listUsers['email'] ?></p>
+                <p class="mt-3">Nom : <?= $listUsers['lastName'] ?></p>
+                <p class="mt-3">Prénom : <?= $listUsers['firstName'] ?></p>
+                <p class="mt-3">Statut : <?php if ($listUsers['rank'] == 1) {
+                                                echo "Administrateur";
+                                            } else {
+                                                echo "Membre";
+                                            } ?></p>
+                <p class="mt-3">Genre : <?php echo $listUsers['gender'] ?></p>
+                <p class="mt-3">Date de création : <?php echo $listUsers['created_at'] ?></p>
+            </div>
+
+        </div>
+
         <?php else :
 
         if (!isset($_SESSION['auth'])) : ?>
@@ -112,6 +129,7 @@ require_once '../../database/database.php';
 
     <?php endif; ?>
 
+    <script src="../ajax/ajax.js"></script>
 </body>
 
 </html>
